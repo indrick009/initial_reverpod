@@ -2,9 +2,7 @@ import 'package:app_config/app_config.dart';
 import 'package:app_monitoring/app_monitoring.dart';
 import 'package:app_notifications/app_notifications.dart';
 import 'package:app_store/app_store.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:test_riverpod/firebase_options.dart';
 
 final class AppBootstrap {
   const AppBootstrap._();
@@ -13,17 +11,10 @@ final class AppBootstrap {
     final config = AppConfig(
       environment: AppEnvironment.development,
       api: ApiConfig(baseUrl: Uri.parse('https://api.crina.dev')),
-      monitoring: const MonitoringConfig(enabled: false),
+      monitoring: const MonitoringConfig(enabled: true),
     );
 
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-
-    final errorReporter = FirebaseCrashlyticsErrorReporter();
-    await errorReporter.setCollectionEnabled(
-      config.monitoring.shouldReportCrashes,
-    );
+    final errorReporter = await _createErrorReporter(config);
     await errorReporter.setCustomKey('environment', config.environment.name);
 
     final appDirectory = await getApplicationDocumentsDirectory();
@@ -64,6 +55,17 @@ final class AppBootstrap {
       notificationPermissionService: notificationPermissionService,
       errorReporter: errorReporter,
     );
+  }
+
+  static Future<ErrorReporter> _createErrorReporter(AppConfig config) async {
+    if (!config.monitoring.shouldReportCrashes) {
+      return const NoopErrorReporter();
+    }
+
+    final errorReporter = FirebaseCrashlyticsErrorReporter();
+    await errorReporter.setCollectionEnabled(true);
+
+    return errorReporter;
   }
 }
 

@@ -1,10 +1,11 @@
 import 'package:app_notifications/app_notifications.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+
+import 'firebase_app_initializer.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
+  await FirebaseAppInitializer.initializeDefaultApp();
 
   final notificationMessage = const FirebaseNotificationMessageMapper().map(
     message,
