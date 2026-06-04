@@ -1,0 +1,11 @@
+{
+  "@@locale": "fr",
+  "appName": "Crina",
+  "@appName": {
+    "description": "Nom public de l'application."
+  },
+  "homeTitle": "Crina",
+  "@homeTitle": {
+    "description": "Titre de l'écran d'accueil temporaire."
+  }
+}

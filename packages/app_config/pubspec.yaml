@@ -1,0 +1,7 @@
+name: app_config
+description: Application configuration package for environments and flags.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.5

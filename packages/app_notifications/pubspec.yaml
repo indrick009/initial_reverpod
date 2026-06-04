@@ -1,0 +1,16 @@
+name: app_notifications
+description: System notification abstraction package for the app.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  app_routing:
+    path: ../app_routing
+  flutter:
+    sdk: flutter
+  firebase_core: any
+  firebase_messaging: any
+  flutter_local_notifications: ^19.5.0

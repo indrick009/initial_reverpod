@@ -1,0 +1,16 @@
+name: app_store
+description: Storage abstraction and infrastructure package for the app.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_secure_storage: ^9.2.4
+  hive: ^2.2.3
+
+dev_dependencies:
+  lints: ^6.0.0
