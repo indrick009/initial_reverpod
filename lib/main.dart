@@ -6,6 +6,7 @@ import 'app/app.dart';
 import 'bootstrap/app_bootstrap.dart';
 import 'bootstrap/firebase_background_notification_handler.dart';
 import 'providers/app_core_providers.dart';
+import 'providers/app_provider_observer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +17,7 @@ Future<void> main() async {
 
   runApp(
     ProviderScope(
+      observers: const [AppProviderObserver()],
       overrides: [
         appConfigProvider.overrideWithValue(bootstrap.config),
         storageBootstrapperProvider.overrideWithValue(

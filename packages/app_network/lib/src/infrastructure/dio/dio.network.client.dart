@@ -5,6 +5,7 @@ import '../../domain/http.method.dart';
 import '../../domain/network.client.dart';
 import '../../domain/network.request.dart';
 import '../../domain/network.response.dart';
+import 'dio.api_log.interceptor.dart';
 import 'dio.error.mapper.dart';
 
 final class DioNetworkClient implements NetworkClient {
@@ -17,21 +18,27 @@ final class DioNetworkClient implements NetworkClient {
     Duration connectTimeout = const Duration(seconds: 10),
     Duration receiveTimeout = const Duration(seconds: 20),
     Duration sendTimeout = const Duration(seconds: 20),
-  }) : _dio =
-           dio ??
-           Dio(
-             BaseOptions(
-               baseUrl: baseUrl,
-               headers: defaultHeaders,
-               connectTimeout: connectTimeout,
-               receiveTimeout: receiveTimeout,
-               sendTimeout: sendTimeout,
-             ),
-           ),
-       _errorMapper = errorMapper,
-       _retryPolicy = retryPolicy;
+    bool enableApiLogs = true,
+  }) : _errorMapper = errorMapper,
+       _retryPolicy = retryPolicy {
+    _dio =
+        dio ??
+        Dio(
+          BaseOptions(
+            baseUrl: baseUrl,
+            headers: defaultHeaders,
+            connectTimeout: connectTimeout,
+            receiveTimeout: receiveTimeout,
+            sendTimeout: sendTimeout,
+          ),
+        );
 
-  final Dio _dio;
+    if (enableApiLogs) {
+      _dio.interceptors.add(const DioApiLogInterceptor());
+    }
+  }
+
+  late final Dio _dio;
   final DioErrorMapper _errorMapper;
   final NetworkRetryPolicy _retryPolicy;
 
