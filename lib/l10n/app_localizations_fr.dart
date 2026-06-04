@@ -13,4 +13,19 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get homeTitle => 'Crina';
+
+  @override
+  String get navHome => 'Accueil';
+
+  @override
+  String get navCatalog => 'Catalogue';
+
+  @override
+  String get navOrders => 'Commandes';
+
+  @override
+  String get navMessages => 'Messages';
+
+  @override
+  String get navAccount => 'Compte';
 }

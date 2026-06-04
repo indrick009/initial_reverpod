@@ -104,11 +104,41 @@ abstract class AppLocalizations {
   /// **'Crina'**
   String get appName;
 
-  /// Titre de l'écran d'accueil temporaire.
+  /// Titre de l'ecran d'accueil temporaire.
   ///
   /// In fr, this message translates to:
   /// **'Crina'**
   String get homeTitle;
+
+  /// No description provided for @navHome.
+  ///
+  /// In fr, this message translates to:
+  /// **'Accueil'**
+  String get navHome;
+
+  /// No description provided for @navCatalog.
+  ///
+  /// In fr, this message translates to:
+  /// **'Catalogue'**
+  String get navCatalog;
+
+  /// No description provided for @navOrders.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commandes'**
+  String get navOrders;
+
+  /// No description provided for @navMessages.
+  ///
+  /// In fr, this message translates to:
+  /// **'Messages'**
+  String get navMessages;
+
+  /// No description provided for @navAccount.
+  ///
+  /// In fr, this message translates to:
+  /// **'Compte'**
+  String get navAccount;
 }
 
 class _AppLocalizationsDelegate

@@ -6,6 +6,11 @@
   },
   "homeTitle": "Crina",
   "@homeTitle": {
-    "description": "Titre de l'écran d'accueil temporaire."
-  }
+    "description": "Titre de l'ecran d'accueil temporaire."
+  },
+  "navHome": "Accueil",
+  "navCatalog": "Catalogue",
+  "navOrders": "Commandes",
+  "navMessages": "Messages",
+  "navAccount": "Compte"
 }
