@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import '../l10n/app_localizations.dart';
+import '../shared/localization/app_locale_providers.dart';
 import '../shared/theme/app_theme_providers.dart';
 import '../shared/ui/responsive/app_breakpoints.dart';
 import 'router/app_router.dart';
@@ -13,6 +14,7 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
+    final locale = ref.watch(appLocaleProvider);
     final themeConfig = ref.watch(appThemeConfigProvider);
     final themeMode = ref.watch(effectiveThemeModeProvider);
 
@@ -21,6 +23,7 @@ class App extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      locale: locale,
       theme: themeConfig.lightTheme,
       darkTheme: themeConfig.darkTheme,
       themeMode: themeMode,

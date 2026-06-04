@@ -12,5 +12,14 @@
   "navCatalog": "Catalogue",
   "navOrders": "Commandes",
   "navMessages": "Messages",
-  "navAccount": "Compte"
+  "navAccount": "Compte",
+  "homeTestTitle": "Tests de fondation",
+  "testNotificationButton": "Tester la notification",
+  "notificationSentMessage": "Notification envoyee",
+  "notificationPermissionDeniedMessage": "Permission notification refusee",
+  "notificationFailedMessage": "Impossible d'afficher la notification",
+  "useLightThemeButton": "Theme clair",
+  "useDarkThemeButton": "Theme sombre",
+  "useFrenchButton": "Francais",
+  "useEnglishButton": "Anglais"
 }

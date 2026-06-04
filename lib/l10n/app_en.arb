@@ -6,5 +6,14 @@
   "navCatalog": "Catalog",
   "navOrders": "Orders",
   "navMessages": "Messages",
-  "navAccount": "Account"
+  "navAccount": "Account",
+  "homeTestTitle": "Foundation tests",
+  "testNotificationButton": "Test notification",
+  "notificationSentMessage": "Notification sent",
+  "notificationPermissionDeniedMessage": "Notification permission denied",
+  "notificationFailedMessage": "Unable to show notification",
+  "useLightThemeButton": "Light theme",
+  "useDarkThemeButton": "Dark theme",
+  "useFrenchButton": "French",
+  "useEnglishButton": "English"
 }

@@ -28,4 +28,33 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get navAccount => 'Compte';
+
+  @override
+  String get homeTestTitle => 'Tests de fondation';
+
+  @override
+  String get testNotificationButton => 'Tester la notification';
+
+  @override
+  String get notificationSentMessage => 'Notification envoyee';
+
+  @override
+  String get notificationPermissionDeniedMessage =>
+      'Permission notification refusee';
+
+  @override
+  String get notificationFailedMessage =>
+      'Impossible d\'afficher la notification';
+
+  @override
+  String get useLightThemeButton => 'Theme clair';
+
+  @override
+  String get useDarkThemeButton => 'Theme sombre';
+
+  @override
+  String get useFrenchButton => 'Francais';
+
+  @override
+  String get useEnglishButton => 'Anglais';
 }

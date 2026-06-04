@@ -139,6 +139,60 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Compte'**
   String get navAccount;
+
+  /// No description provided for @homeTestTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tests de fondation'**
+  String get homeTestTitle;
+
+  /// No description provided for @testNotificationButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tester la notification'**
+  String get testNotificationButton;
+
+  /// No description provided for @notificationSentMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Notification envoyee'**
+  String get notificationSentMessage;
+
+  /// No description provided for @notificationPermissionDeniedMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Permission notification refusee'**
+  String get notificationPermissionDeniedMessage;
+
+  /// No description provided for @notificationFailedMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Impossible d\'afficher la notification'**
+  String get notificationFailedMessage;
+
+  /// No description provided for @useLightThemeButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Theme clair'**
+  String get useLightThemeButton;
+
+  /// No description provided for @useDarkThemeButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Theme sombre'**
+  String get useDarkThemeButton;
+
+  /// No description provided for @useFrenchButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Francais'**
+  String get useFrenchButton;
+
+  /// No description provided for @useEnglishButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Anglais'**
+  String get useEnglishButton;
 }
 
 class _AppLocalizationsDelegate
