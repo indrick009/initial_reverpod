@@ -13,6 +13,7 @@ final class AppBootstrap {
     final config = AppConfig(
       environment: AppEnvironment.development,
       api: ApiConfig(baseUrl: Uri.parse('https://api.crina.dev')),
+      monitoring: const MonitoringConfig(enabled: false),
     );
 
     await Firebase.initializeApp(
@@ -20,7 +21,9 @@ final class AppBootstrap {
     );
 
     final errorReporter = FirebaseCrashlyticsErrorReporter();
-    await errorReporter.setCollectionEnabled(config.isProduction);
+    await errorReporter.setCollectionEnabled(
+      config.monitoring.shouldReportCrashes,
+    );
     await errorReporter.setCustomKey('environment', config.environment.name);
 
     final appDirectory = await getApplicationDocumentsDirectory();

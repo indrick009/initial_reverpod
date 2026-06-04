@@ -50,19 +50,18 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBAWPEt-Q4st3F5bRupKO5bD0bVJqqoeaU',
-    appId: '1:68241805544:android:7cd622297a28583f90395d',
-    messagingSenderId: '68241805544',
-    projectId: 'kobbo-e3f89',
-    storageBucket: 'kobbo-e3f89.firebasestorage.app',
+    apiKey: 'AIzaSyAahN7bhe2LQSsmxUcq0k9behgP-h8aHtg',
+    appId: '1:596786421525:android:fb640fe10639227403531c',
+    messagingSenderId: '596786421525',
+    projectId: 'test-riverpod-a7796',
+    storageBucket: 'test-riverpod-a7796.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCa5LW5RsXB5P6-h7rDmHjHaP8hZGiFLLM',
-    appId: '1:68241805544:ios:bae258378a6c047f90395d',
-    messagingSenderId: '68241805544',
-    projectId: 'kobbo-e3f89',
-    storageBucket: 'kobbo-e3f89.firebasestorage.app',
-    iosBundleId: 'com.crinastudio.kobbo',
+    apiKey: 'AIzaSyDDeKrMfjwDX2VSOCZo7ftScBPzm_4U3pg',
+    appId: '1:596786421525:ios:04898c811fc3b28903531c',
+    messagingSenderId: '596786421525',
+    projectId: 'test-riverpod-a7796',
+    storageBucket: 'test-riverpod-a7796.firebasestorage.app',
+    iosBundleId: 'com.example.testRiverpod',
   );
 }

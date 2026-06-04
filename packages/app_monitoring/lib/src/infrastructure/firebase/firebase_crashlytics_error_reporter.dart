@@ -10,8 +10,8 @@ final class FirebaseCrashlyticsErrorReporter implements ErrorReporter {
   final FirebaseCrashlytics _crashlytics;
 
   @override
-  Future<void> setCollectionEnabled(bool enabled) {
-    return _crashlytics.setCrashlyticsCollectionEnabled(enabled);
+  Future<void> setCollectionEnabled(bool enabled) async {
+    await _guard(() => _crashlytics.setCrashlyticsCollectionEnabled(enabled));
   }
 
   @override
@@ -20,12 +20,14 @@ final class FirebaseCrashlyticsErrorReporter implements ErrorReporter {
     StackTrace stackTrace, {
     bool fatal = false,
     String? reason,
-  }) {
-    return _crashlytics.recordError(
-      error,
-      stackTrace,
-      fatal: fatal,
-      reason: reason,
+  }) async {
+    await _guard(
+      () => _crashlytics.recordError(
+        error,
+        stackTrace,
+        fatal: fatal,
+        reason: reason,
+      ),
     );
   }
 
@@ -33,26 +35,50 @@ final class FirebaseCrashlyticsErrorReporter implements ErrorReporter {
   Future<void> recordFlutterError(
     FlutterErrorDetails details, {
     bool fatal = false,
-  }) {
+  }) async {
     if (fatal) {
-      return _crashlytics.recordFlutterFatalError(details);
+      await _guard(() => _crashlytics.recordFlutterFatalError(details));
+      return;
     }
 
-    return _crashlytics.recordFlutterError(details);
+    await _guard(() => _crashlytics.recordFlutterError(details));
   }
 
   @override
-  Future<void> setUserId(String userId) {
-    return _crashlytics.setUserIdentifier(userId);
+  Future<void> setUserId(String userId) async {
+    await _guard(() => _crashlytics.setUserIdentifier(userId));
   }
 
   @override
-  Future<void> setCustomKey(String key, Object value) {
-    return _crashlytics.setCustomKey(key, value);
+  Future<void> setCustomKey(String key, Object value) async {
+    await _guard(() => _crashlytics.setCustomKey(key, value));
   }
 
   @override
   void log(String message) {
-    _crashlytics.log(message);
+    _guardSync(() => _crashlytics.log(message));
+  }
+
+  Future<void> _guard(Future<void> Function() action) async {
+    try {
+      await action();
+    } catch (error, stackTrace) {
+      _debugLog(error, stackTrace);
+    }
+  }
+
+  void _guardSync(void Function() action) {
+    try {
+      action();
+    } catch (error, stackTrace) {
+      _debugLog(error, stackTrace);
+    }
+  }
+
+  void _debugLog(Object error, StackTrace stackTrace) {
+    if (!kDebugMode) return;
+
+    debugPrint('[Crashlytics disabled] $error');
+    debugPrintStack(stackTrace: stackTrace);
   }
 }

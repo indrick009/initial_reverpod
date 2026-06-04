@@ -27,6 +27,7 @@ dependencies:
     path: packages/app_store
   cupertino_icons: ^1.0.8
   firebase_core: any
+  firebase_crashlytics: any
   firebase_messaging: any
   flutter_riverpod: ^3.3.1
   go_router: ^17.3.0
