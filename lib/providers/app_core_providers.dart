@@ -1,4 +1,5 @@
 import 'package:app_config/app_config.dart';
+import 'package:app_monitoring/app_monitoring.dart';
 import 'package:app_notifications/app_notifications.dart';
 import 'package:app_store/app_store.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,4 +48,8 @@ final notificationPermissionServiceProvider =
 
 final assetPreloaderProvider = Provider<AssetPreloader>((ref) {
   return const FlutterAssetPreloader();
+});
+
+final errorReporterProvider = Provider<ErrorReporter>((ref) {
+  throw UnimplementedError('ErrorReporter must be provided during bootstrap.');
 });

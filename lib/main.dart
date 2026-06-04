@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'app/app.dart';
+import 'bootstrap/app_error_handler.dart';
 import 'bootstrap/app_bootstrap.dart';
 import 'bootstrap/firebase_background_notification_handler.dart';
 import 'providers/app_core_providers.dart';
@@ -14,6 +15,7 @@ Future<void> main() async {
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   final bootstrap = await AppBootstrap.initialize();
+  AppErrorHandler.install(bootstrap.errorReporter);
 
   runApp(
     ProviderScope(
@@ -35,6 +37,7 @@ Future<void> main() async {
         notificationPermissionServiceProvider.overrideWithValue(
           bootstrap.notificationPermissionService,
         ),
+        errorReporterProvider.overrideWithValue(bootstrap.errorReporter),
       ],
       child: const App(),
     ),

@@ -1,0 +1,12 @@
+name: app_monitoring
+description: Application monitoring and error reporting package.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  firebase_crashlytics: any
+  flutter:
+    sdk: flutter

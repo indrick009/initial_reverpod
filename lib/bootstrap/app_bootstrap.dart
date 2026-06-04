@@ -1,4 +1,5 @@
 import 'package:app_config/app_config.dart';
+import 'package:app_monitoring/app_monitoring.dart';
 import 'package:app_notifications/app_notifications.dart';
 import 'package:app_store/app_store.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,6 +18,10 @@ final class AppBootstrap {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+
+    final errorReporter = FirebaseCrashlyticsErrorReporter();
+    await errorReporter.setCollectionEnabled(config.isProduction);
+    await errorReporter.setCustomKey('environment', config.environment.name);
 
     final appDirectory = await getApplicationDocumentsDirectory();
     final storageBootstrapper = StorageBootstrapper(
@@ -54,6 +59,7 @@ final class AppBootstrap {
       pushNotificationService: pushNotificationService,
       notificationTokenProvider: notificationTokenProvider,
       notificationPermissionService: notificationPermissionService,
+      errorReporter: errorReporter,
     );
   }
 }
@@ -66,6 +72,7 @@ final class AppBootstrapResult {
     required this.pushNotificationService,
     required this.notificationTokenProvider,
     required this.notificationPermissionService,
+    required this.errorReporter,
   });
 
   final AppConfig config;
@@ -74,4 +81,5 @@ final class AppBootstrapResult {
   final PushNotificationService pushNotificationService;
   final NotificationTokenProvider notificationTokenProvider;
   final NotificationPermissionService notificationPermissionService;
+  final ErrorReporter errorReporter;
 }
