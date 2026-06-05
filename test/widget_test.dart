@@ -13,6 +13,9 @@ void main() {
           localNotificationServiceProvider.overrideWithValue(
             const _FakeLocalNotificationService(),
           ),
+          notificationPermissionServiceProvider.overrideWithValue(
+            const _FakeNotificationPermissionService(),
+          ),
         ],
         child: const App(),
       ),
@@ -38,4 +41,19 @@ final class _FakeLocalNotificationService implements LocalNotificationService {
 
   @override
   Future<void> cancelAll() async {}
+}
+
+final class _FakeNotificationPermissionService
+    implements NotificationPermissionService {
+  const _FakeNotificationPermissionService();
+
+  @override
+  Future<NotificationPermissionStatus> status() async {
+    return NotificationPermissionStatus.granted;
+  }
+
+  @override
+  Future<NotificationPermissionStatus> requestPermission() async {
+    return NotificationPermissionStatus.granted;
+  }
 }

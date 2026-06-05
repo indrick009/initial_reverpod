@@ -4,6 +4,7 @@ import 'package:app_notifications/app_notifications.dart';
 import 'package:app_store/app_store.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../core/workers/isolate_worker.dart';
 import '../shared/assets/asset_preloader.dart';
 import '../shared/assets/flutter_asset_preloader.dart';
 
@@ -48,6 +49,10 @@ final notificationPermissionServiceProvider =
 
 final assetPreloaderProvider = Provider<AssetPreloader>((ref) {
   return const FlutterAssetPreloader();
+});
+
+final isolateWorkerProvider = Provider<IsolateWorker>((ref) {
+  return const FlutterIsolateWorker();
 });
 
 final errorReporterProvider = Provider<ErrorReporter>((ref) {

@@ -1,0 +1,7 @@
+name: app_cache
+description: Application cache package for reusable cache contracts and adapters.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.5

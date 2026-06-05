@@ -44,4 +44,9 @@ Future<void> main() async {
       child: const App(),
     ),
   );
+  
+}
+
+abstract interface class AppBootstrapper {
+  Future<void> initialize()async{}
 }
