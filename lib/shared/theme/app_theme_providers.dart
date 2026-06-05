@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'app_theme.dart';
 import 'app_theme_config.dart';
 
-final appThemeConfigProvider = Provider<AppThemeConfig>((ref) {
+part 'app_theme_providers.g.dart';
+
+@Riverpod(keepAlive: true)
+AppThemeConfig appThemeConfig(Ref ref) {
   return AppTheme.config;
-});
+}
 
-final requestedThemeModeProvider =
-    NotifierProvider<RequestedThemeModeNotifier, ThemeMode>(
-      RequestedThemeModeNotifier.new,
-    );
-
-final class RequestedThemeModeNotifier extends Notifier<ThemeMode> {
+@Riverpod(keepAlive: true)
+final class RequestedThemeMode extends _$RequestedThemeMode {
   @override
   ThemeMode build() {
     return ThemeMode.system;
@@ -24,16 +23,18 @@ final class RequestedThemeModeNotifier extends Notifier<ThemeMode> {
   }
 }
 
-final effectiveThemeModeProvider = Provider<ThemeMode>((ref) {
+@Riverpod(keepAlive: true)
+ThemeMode effectiveThemeMode(Ref ref) {
   final config = ref.watch(appThemeConfigProvider);
   final requestedMode = ref.watch(requestedThemeModeProvider);
 
   return config.resolveThemeMode(requestedMode);
-});
+}
 
-final appThemeControllerProvider = Provider<AppThemeController>((ref) {
+@Riverpod(keepAlive: true)
+AppThemeController appThemeController(Ref ref) {
   return AppThemeController(ref);
-});
+}
 
 final class AppThemeController {
   const AppThemeController(this._ref);
