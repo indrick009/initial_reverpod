@@ -9,9 +9,11 @@ import 'bootstrap/firebase_app_initializer.dart';
 import 'bootstrap/firebase_background_notification_handler.dart';
 import 'providers/app_core_providers.dart';
 import 'providers/app_provider_observer.dart';
+import 'shared/ui/images/app_image_cache_config.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  AppImageCacheConfig.configureForEcommerce();
 
   await FirebaseAppInitializer.initializeDefaultApp();
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
@@ -44,9 +46,8 @@ Future<void> main() async {
       child: const App(),
     ),
   );
-  
 }
 
 abstract interface class AppBootstrapper {
-  Future<void> initialize()async{}
+  Future<void> initialize();
 }

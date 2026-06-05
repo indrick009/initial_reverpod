@@ -116,11 +116,11 @@ abstract class AppLocalizations {
   /// **'Accueil'**
   String get navHome;
 
-  /// No description provided for @navCatalog.
+  /// No description provided for @navProducts.
   ///
   /// In fr, this message translates to:
-  /// **'Catalogue'**
-  String get navCatalog;
+  /// **'Produits'**
+  String get navProducts;
 
   /// No description provided for @navOrders.
   ///

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/products/presentation/screens/products_screen.dart';
 import '../navigation/app_navigation_destination.dart';
 import '../navigation/app_navigation_shell.dart';
 import '../navigation/empty_navigation_branch_screen.dart';
@@ -26,7 +27,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
-          for (final destination in AppNavigationDestination.values.skip(1))
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppNavigationDestination.products.path,
+                builder: (context, state) => const ProductsScreen(),
+              ),
+            ],
+          ),
+          for (final destination in AppNavigationDestination.values.skip(2))
             StatefulShellBranch(
               routes: [
                 GoRoute(

@@ -41,4 +41,23 @@ void main() {
 
     expect(await cache.contains('b'), isFalse);
   });
+
+  test(
+    'InMemoryRequestCache delegates request values to cache store',
+    () async {
+      final requestCache = InMemoryRequestCache();
+
+      await requestCache.write(
+        'GET:/products',
+        'payload',
+        policy: const CachePolicy(ttl: Duration(minutes: 1)),
+      );
+
+      expect(await requestCache.read<String>('GET:/products'), 'payload');
+
+      await requestCache.delete('GET:/products');
+
+      expect(await requestCache.read<String>('GET:/products'), isNull);
+    },
+  );
 }

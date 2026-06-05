@@ -9,7 +9,7 @@
     "description": "Titre de l'ecran d'accueil temporaire."
   },
   "navHome": "Accueil",
-  "navCatalog": "Catalogue",
+  "navProducts": "Produits",
   "navOrders": "Commandes",
   "navMessages": "Messages",
   "navAccount": "Compte",

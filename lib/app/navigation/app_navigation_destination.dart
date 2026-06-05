@@ -4,8 +4,8 @@ import '../../l10n/app_localizations.dart';
 
 enum AppNavigationDestination {
   home(path: '/', icon: Icons.home_outlined, selectedIcon: Icons.home),
-  catalog(
-    path: '/catalog',
+  products(
+    path: '/products',
     icon: Icons.grid_view_outlined,
     selectedIcon: Icons.grid_view,
   ),
@@ -38,7 +38,7 @@ enum AppNavigationDestination {
   String label(AppLocalizations l10n) {
     return switch (this) {
       AppNavigationDestination.home => l10n.navHome,
-      AppNavigationDestination.catalog => l10n.navCatalog,
+      AppNavigationDestination.products => l10n.navProducts,
       AppNavigationDestination.orders => l10n.navOrders,
       AppNavigationDestination.messages => l10n.navMessages,
       AppNavigationDestination.account => l10n.navAccount,

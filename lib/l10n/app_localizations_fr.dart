@@ -18,7 +18,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get navHome => 'Accueil';
 
   @override
-  String get navCatalog => 'Catalogue';
+  String get navProducts => 'Produits';
 
   @override
   String get navOrders => 'Commandes';
