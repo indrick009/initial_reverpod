@@ -1,11 +1,10 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final appLocaleProvider = NotifierProvider<AppLocaleNotifier, Locale?>(
-  AppLocaleNotifier.new,
-);
+part 'app_locale_providers.g.dart';
 
-final class AppLocaleNotifier extends Notifier<Locale?> {
+@Riverpod(keepAlive: true)
+final class AppLocale extends _$AppLocale {
   @override
   Locale? build() {
     return null;
