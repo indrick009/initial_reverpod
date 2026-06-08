@@ -3,6 +3,7 @@ export 'src/domain/http.method.dart';
 export 'src/domain/network.client.dart';
 export 'src/domain/network.failure.dart';
 export 'src/domain/network.request.dart';
+export 'src/domain/network.response_body_type.dart';
 export 'src/domain/network.response.dart';
 export 'src/infrastructure/dio/dio.api_log.interceptor.dart';
 export 'src/infrastructure/dio/dio.error.mapper.dart';

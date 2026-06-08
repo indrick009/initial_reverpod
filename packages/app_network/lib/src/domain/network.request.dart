@@ -1,4 +1,5 @@
 import 'http.method.dart';
+import 'network.response_body_type.dart';
 
 final class NetworkRequest {
   const NetworkRequest({
@@ -8,6 +9,7 @@ final class NetworkRequest {
     this.headers = const <String, String>{},
     this.body,
     this.timeout,
+    this.responseBodyType = NetworkResponseBodyType.json,
   });
 
   final HttpMethod method;
@@ -16,4 +18,5 @@ final class NetworkRequest {
   final Map<String, String> headers;
   final Object? body;
   final Duration? timeout;
+  final NetworkResponseBodyType responseBodyType;
 }

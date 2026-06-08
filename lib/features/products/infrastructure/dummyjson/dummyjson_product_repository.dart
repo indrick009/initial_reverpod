@@ -31,12 +31,16 @@ final class DummyJsonProductRepository implements ProductRepository {
     }
 
     try {
-      final response = await _networkClient.send<Map<String, Object?>>(
-        const NetworkRequest(method: HttpMethod.get, path: '/products'),
+      final response = await _networkClient.send<String>(
+        const NetworkRequest(
+          method: HttpMethod.get,
+          path: '/products',
+          responseBodyType: NetworkResponseBodyType.plainText,
+        ),
       );
 
       final products = await _isolateWorker.run(
-        parseDummyJsonProducts,
+        parseDummyJsonProductsJson,
         response.data,
       );
 

@@ -10,7 +10,7 @@ final class AppBootstrap {
   static Future<AppBootstrapResult> initialize() async {
     final config = AppConfig(
       environment: AppEnvironment.development,
-      api: ApiConfig(baseUrl: Uri.parse('https://api.crina.dev')),
+      api: ApiConfig(baseUrl: Uri.parse('https://dummyjson.com')),
       monitoring: const MonitoringConfig(enabled: true),
     );
 

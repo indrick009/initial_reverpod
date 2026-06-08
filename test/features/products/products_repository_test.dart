@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:app_cache/app_cache.dart';
 import 'package:app_network/app_network.dart';
 import 'package:flutter/foundation.dart';
@@ -45,11 +47,12 @@ final class _FakeNetworkClient implements NetworkClient {
 
     expect(request.method, HttpMethod.get);
     expect(request.path, '/products');
+    expect(request.responseBodyType, NetworkResponseBodyType.plainText);
 
     return NetworkResponse<T>(
       statusCode: 200,
       data:
-          <String, Object?>{
+          jsonEncode(<String, Object?>{
                 'products': [
                   <String, Object?>{
                     'id': 1,
@@ -63,7 +66,7 @@ final class _FakeNetworkClient implements NetworkClient {
                         'https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp',
                   },
                 ],
-              }
+              })
               as T,
     );
   }

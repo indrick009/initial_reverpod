@@ -37,6 +37,7 @@ final class _ProductsList extends ConsumerWidget {
     return RefreshIndicator(
       onRefresh: () => ref.read(productsControllerProvider.notifier).refresh(),
       child: ListView.separated(
+        cacheExtent: 200,
         padding: const EdgeInsets.all(16),
         itemCount: products.length,
         separatorBuilder: (context, index) => const SizedBox(height: 12),

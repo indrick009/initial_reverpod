@@ -1,6 +1,6 @@
 import 'package:app_cache/app_cache.dart';
 import 'package:app_network/app_network.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/usecase/usecase.dart';
 import '../../../../providers/app_core_providers.dart';
@@ -10,38 +10,51 @@ import '../../domain/entities/product.dart';
 import '../../domain/repositories/product_repository.dart';
 import '../../infrastructure/dummyjson/dummyjson_product_repository.dart';
 
-final productsConfigProvider = Provider<ProductsConfig>((ref) {
-  return ProductsConfig(baseUrl: Uri.parse('https://dummyjson.com'));
-});
+part 'products_providers.g.dart';
 
-final productsNetworkClientProvider = Provider<NetworkClient>((ref) {
+@Riverpod(keepAlive: true)
+ProductsConfig productsConfig(Ref ref) {
+  final appConfig = ref.watch(appConfigProvider);
+
+  return ProductsConfig(baseUrl: appConfig.api.baseUrl);
+}
+
+@Riverpod(keepAlive: true)
+NetworkClient productsNetworkClient(Ref ref) {
+  final appConfig = ref.watch(appConfigProvider);
   final config = ref.watch(productsConfigProvider);
 
-  return DioNetworkClient(baseUrl: config.baseUrl.toString());
-});
+  return DioNetworkClient(
+    baseUrl: config.baseUrl.toString(),
+    connectTimeout: appConfig.api.connectTimeout,
+    receiveTimeout: appConfig.api.receiveTimeout,
+    sendTimeout: appConfig.api.sendTimeout,
+  );
+}
 
-final productsRequestCacheProvider = Provider<RequestCache>((ref) {
+@Riverpod(keepAlive: true)
+RequestCache productsRequestCache(Ref ref) {
   return InMemoryRequestCache();
-});
+}
 
-final productRepositoryProvider = Provider<ProductRepository>((ref) {
+@Riverpod(keepAlive: true)
+ProductRepository productRepository(Ref ref) {
   return DummyJsonProductRepository(
     networkClient: ref.watch(productsNetworkClientProvider),
     requestCache: ref.watch(productsRequestCacheProvider),
     isolateWorker: ref.watch(isolateWorkerProvider),
   );
-});
+}
 
-final getProductsUseCaseProvider = Provider<GetProductsUseCase>((ref) {
+@Riverpod(keepAlive: true)
+GetProductsUseCase getProductsUseCase(Ref ref) {
   return GetProductsUseCase(repository: ref.watch(productRepositoryProvider));
-});
+}
 
-final productsControllerProvider =
-    AsyncNotifierProvider<ProductsController, List<Product>>(
-      ProductsController.new,
-    );
+Duration? _noRetry(int retryCount, Object error) => null;
 
-final class ProductsController extends AsyncNotifier<List<Product>> {
+@Riverpod(keepAlive: true, retry: _noRetry)
+final class ProductsController extends _$ProductsController {
   @override
   Future<List<Product>> build() {
     return ref.watch(getProductsUseCaseProvider)(const NoParams());

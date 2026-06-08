@@ -6,7 +6,15 @@ sealed class ProductFailure implements Exception {
   final StackTrace? stackTrace;
 
   @override
-  String toString() => message;
+  String toString() {
+    final rootCause = cause;
+
+    if (rootCause == null) {
+      return message;
+    }
+
+    return '$message Cause: $rootCause';
+  }
 }
 
 final class ProductLoadFailure extends ProductFailure {

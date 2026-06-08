@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 import '../../application/network.retry.policy.dart';
 import '../../domain/http.method.dart';
 import '../../domain/network.client.dart';
 import '../../domain/network.request.dart';
+import '../../domain/network.response_body_type.dart';
 import '../../domain/network.response.dart';
 import 'dio.api_log.interceptor.dart';
 import 'dio.error.mapper.dart';
@@ -57,12 +60,13 @@ final class DioNetworkClient implements NetworkClient {
             headers: request.headers,
             sendTimeout: request.timeout,
             receiveTimeout: request.timeout,
+            responseType: _responseType(request.responseBodyType),
           ),
         );
 
         return NetworkResponse<T>(
           statusCode: response.statusCode ?? 0,
-          data: response.data as T,
+          data: _responseData<T>(response.data, request.responseBodyType),
           headers: response.headers.map,
         );
       } catch (error, stackTrace) {
@@ -86,5 +90,24 @@ final class DioNetworkClient implements NetworkClient {
       HttpMethod.patch => 'PATCH',
       HttpMethod.delete => 'DELETE',
     };
+  }
+
+  ResponseType _responseType(NetworkResponseBodyType bodyType) {
+    return switch (bodyType) {
+      NetworkResponseBodyType.json => ResponseType.json,
+      NetworkResponseBodyType.plainText => ResponseType.plain,
+    };
+  }
+
+  T _responseData<T>(Object? data, NetworkResponseBodyType bodyType) {
+    if (bodyType == NetworkResponseBodyType.plainText && T == String) {
+      return switch (data) {
+        String value => value as T,
+        null => '' as T,
+        _ => jsonEncode(data) as T,
+      };
+    }
+
+    return data as T;
   }
 }
